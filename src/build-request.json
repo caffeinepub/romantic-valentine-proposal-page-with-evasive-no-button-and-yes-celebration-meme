@@ -1,0 +1,108 @@
+{
+  "kind": "build_request",
+  "title": "Romantic Valentine proposal page with evasive No button and Yes celebration meme",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a single-page romantic Valentine prompt UI that asks: \"Will you be my Valentine?\" with exactly two prominent options: \"Yes\" and \"No\", using a pink-and-white romantic theme.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create an interactive web page as a surprise for my girlfriend... ask her to be my Valentine. There should be two options: Yes or No.",
+          "The page should be themed romantically with a pink and white color scheme"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Landing view shows one clear question: \"Will you be my Valentine?\"",
+        "Exactly two visible choices are present: a \"Yes\" button and a \"No\" button",
+        "Overall styling uses a coherent pink-and-white romantic theme (background, typography, button styles)",
+        "The page works in Chrome on iPad-sized screens without layout overflow or clipped controls"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement interactive behavior for the \"No\" button so that when the user attempts to interact with it (mouse hover on desktop; touch/pointer interaction on iPad), it moves to a new position within the viewport/container, preventing the user from clicking it.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "When she hovers her cursor over No, it should move away so she cannot click it, forcing her to click only on Yes.",
+          "...easily run it on my iPad using Chrome."
+        ]
+      },
+      "acceptanceCriteria": [
+        "On desktop: moving the cursor over the \"No\" button causes it to reposition before a click can occur",
+        "On touch devices (e.g., iPad Chrome): attempting to tap/press the \"No\" button causes it to reposition, making it effectively unclickable",
+        "The \"No\" button remains visible on-screen after moving (does not move off-canvas)",
+        "The \"Yes\" button remains stable and clickable throughout"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "When the user clicks \"Yes\", transition the UI to a celebratory state that displays a meme image and the text: \"Good choice\".",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "When she clicks Yes, show her a meme image telling her \"Good choice"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking \"Yes\" reliably switches the view/state to a celebration screen (or modal)",
+        "The celebration view displays the exact text: \"Good choice\"",
+        "The celebration view displays the provided/generated meme image (served as a static frontend asset)",
+        "The initial question and buttons are no longer the primary focus once \"Yes\" is clicked (hidden or clearly de-emphasized)"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add the required static image asset(s) to the frontend and render them directly from the frontend (no backend routing), ensuring they load correctly in production builds.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All generated images are placed under frontend/public/assets/generated",
+        "The \"Yes\" success state renders the meme image from frontend/public/assets/generated via a static path",
+        "No backend changes are required for serving images"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/components/ui or any other immutable paths listed in SYSTEM_CONTEXT.",
+    "Keep the app as a single-page experience focused only on asking to be Valentine and the resulting success state.",
+    "No backend canister features are required for this request."
+  ],
+  "nonGoals": [
+    "User authentication (including Internet Identity)",
+    "Saving responses to persistent storage",
+    "Additional pages, navigation, or multi-step flows",
+    "Integrations with external APIs or third-party services"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Meme-style romantic image with the words \"Good choice\" (valentine-good-choice-meme.dim_1024x1024.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Valentine single-page prompt with evasive No and Yes celebration meme",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Build a single-page romantic Valentine prompt with exactly two choices (Yes/No) using a pink-and-white theme and iPad-friendly layout.",
+      "acceptanceCriteria": [
+        "Landing view shows one clear question: \"Will you be my Valentine?\"",
+        "Exactly two visible choices are present: a \"Yes\" button and a \"No\" button",
+        "Overall styling uses a coherent pink-and-white romantic theme (background, typography, button styles)",
+        "The page works in Chrome on iPad-sized screens without layout overflow or clipped controls"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the single-page UI layout with the question text and exactly two prominent buttons (Yes/No), using a responsive container that avoids overflow/clipping on iPad-sized screens."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Add global pink-and-white romantic theme styling (background, typography, button baseline styles) using existing global styling entry points; ensure good contrast and responsive spacing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Make the No button evasive on hover (desktop) and touch/pointer interaction (iPad) while keeping it visible and keeping Yes stable/clickable.",
+      "acceptanceCriteria": [
+        "On desktop: moving the cursor over the \"No\" button causes it to reposition before a click can occur",
+        "On touch devices (e.g., iPad Chrome): attempting to tap/press the \"No\" button causes it to reposition, making it effectively unclickable",
+        "The \"No\" button remains visible on-screen after moving (does not move off-canvas)",
+        "The \"Yes\" button remains stable and clickable throughout"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useEvasiveNoButton.ts",
+          "operation": "create",
+          "description": "Implement reusable evasive-position logic that computes a new safe position within a measured container/viewport on hover and pointer/touch interaction, clamping so the button stays fully visible."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the evasive No behavior into the No button using hover and pointer/touch handlers (e.g., pointerenter/pointerdown/touchstart) while keeping the Yes button position stable and always clickable."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "On Yes click, transition to a celebration state showing the meme image and the exact text \"Good choice\".",
+      "acceptanceCriteria": [
+        "Clicking \"Yes\" reliably switches the view/state to a celebration screen (or modal)",
+        "The celebration view displays the exact text: \"Good choice\"",
+        "The celebration view displays the provided/generated meme image (served as a static frontend asset)",
+        "The initial question and buttons are no longer the primary focus once \"Yes\" is clicked (hidden or clearly de-emphasized)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add UI state handling so clicking Yes transitions to a celebration view that prominently renders the exact text \"Good choice\" and displays the meme image; de-emphasize or replace the initial prompt/buttons."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add and render the required static meme image asset from the frontend public folder (no backend involvement).",
+      "acceptanceCriteria": [
+        "All generated images are placed under frontend/public/assets/generated",
+        "The \"Yes\" success state renders the meme image from frontend/public/assets/generated via a static path",
+        "No backend changes are required for serving images"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/valentine-good-choice-meme.dim_1024x1024.png",
+          "operation": "create",
+          "description": "Add the generated static meme image asset at frontend/public/assets/generated/valentine-good-choice-meme.dim_1024x1024.png so it can be served directly by the frontend build."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Reference and render the static image asset from frontend/public/assets/generated/valentine-good-choice-meme.dim_1024x1024.png in the Yes celebration state, ensuring it loads correctly in production builds."
+        }
+      ]
+    }
+  ]
+}

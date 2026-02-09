@@ -1,2 +1,3 @@
-# romantic-valentine-proposal-page-with-evasive-no-button-and-yes-celebration-meme
-Exported from Caffeine project: Romantic Valentine proposal page with evasive No button and Yes celebration meme
+## Romantic Valentine proposal page with evasive No button and Yes celebration meme
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

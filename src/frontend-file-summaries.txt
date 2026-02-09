@@ -1,0 +1,5 @@
+{
+  "frontend/src/App.tsx": "Main Valentine's Day proposal page with interactive Yes/No buttons where the No button evades interaction and clicking Yes shows a celebration screen with the meme image and \"Good choice\" message.",
+  "frontend/src/index.css": "Global styles with romantic pink and white OKLCH color theme, custom animations for fade-in and slide-in effects, and romantic color variables for both light and dark modes.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with custom romantic color tokens (romantic-light, romantic-medium, romantic-accent, romantic-dark) mapped to CSS variables for the Valentine's theme."
+}
